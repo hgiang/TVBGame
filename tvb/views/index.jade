@@ -1,0 +1,39 @@
+extends layout
+
+block content
+    //h1= title
+    //p Welcome to our admin
+
+    // QUESTION LIST
+    h2 TVB Admin
+    #questionList
+        table(class='table table-bordered')
+            thead
+                th Question
+                th Answers
+                th Choices
+            tbody
+    // /QUESTION LIST
+
+    // ADD QUESTION
+    h2 Add Question
+    #addQuestion
+        fieldset
+            input#inputQuestion(type='text', placeholder='Question', class='form-control')
+            br
+            input#inputAnswer(type='text', placeholder='Answer', class='form-control')
+            br
+            table(id="choices")
+                tbody
+                    tr(class="dynamic-form")
+                        td 
+                            input.inputChoices(type='text', placeholder='Choices', class='form-control')
+            br
+            button.btn.btn-info#btnAddChoice <span class="glyphicon glyphicon-plus"></span> Add Choice
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            button.btn.btn-info#btnRemoveChoice <span class="glyphicon glyphicon-minus"></span> Remove Choice
+            br
+            br
+            button.btn.btn-primary#btnAddQuestion <span class="glyphicon glyphicon-plus"></span> Add Question
+    // /ADD QUESTION
+
