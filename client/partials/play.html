@@ -14,7 +14,7 @@
         <div class="col-md-6">
           <!-- ngRepeat: anime in currentQ.titles -->
           <table>
-            <tr  ng-repeat="choice in currentQ.choices" >
+            <tr  ng-repeat="choice in currentQ['choices[]']" >
               <td style="padding: 5px 10px;">
                 <button class="answer answer-{{$index}} btn btn-info" ng-disabled="state != &#39;answering&#39;" ng-click="answer(choice)" value="{{choice}}" >
                   <span ng-bind='choice'></span> 

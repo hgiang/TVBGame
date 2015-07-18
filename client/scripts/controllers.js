@@ -64,7 +64,7 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
       //if ($scope.current >= 2) {
         $scope.finish();
       } else {
-        aQ().choices = _.shuffle(aQ().choices);
+        aQ()['choices[]'] = _.shuffle(aQ()['choices[]']);
         $scope.counter = QUESTION_TIME;        
         $scope.state = 'answering';
         $scope.start();        
@@ -97,7 +97,7 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
     $scope.answer = function(choice) {
       if ($scope.state != 'answering') return;
       var points = 0;
-      var index = aQ().choices.indexOf(choice);
+      var index = aQ()['choices[]'].indexOf(choice);
       $scope.stop();     
       $scope.correct = (choice == aQ().answer);
 
@@ -106,7 +106,7 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
         $scope.total_points += points;
         changeAnswBtn(index, 'btn-success');
       } else {
-        var correct = aQ().choices.indexOf(aQ().answer);
+        var correct = aQ()['choices[]'].indexOf(aQ().answer);
         changeAnswBtn(correct, 'btn-success');
         changeAnswBtn(index, 'btn-danger');
       }
