@@ -64,7 +64,7 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
       //if ($scope.current >= 2) {
         $scope.finish();
       } else {
-        aQ().titles = _.shuffle(aQ().titles);
+        aQ().choices = _.shuffle(aQ().choices);
         $scope.counter = QUESTION_TIME;        
         $scope.state = 'answering';
         $scope.start();        
@@ -94,23 +94,24 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
         .addClass(cls);
     }
 
-    $scope.answer = function(anime) {
+    $scope.answer = function(choice) {
       if ($scope.state != 'answering') return;
       var points = 0;
-      var index = aQ().titles.indexOf(anime);
+      var index = aQ().choices.indexOf(choice);
       $scope.stop();     
-      $scope.correct = (anime == aQ().anime);
+      $scope.correct = (choice == aQ().answer);
+
       if ($scope.correct) {
         points = Math.ceil($scope.counter/3);
         $scope.total_points += points;
         changeAnswBtn(index, 'btn-success');
       } else {
-        var correct = aQ().titles.indexOf(aQ().anime);
+        var correct = aQ().choices.indexOf(aQ().answer);
         changeAnswBtn(correct, 'btn-success');
         changeAnswBtn(index, 'btn-danger');
       }
-      $scope.answers[$scope.current] = {'anime': anime, 'time': $scope.counter,
-        'points': points};
+
+      $scope.answers[$scope.current] = {'choice': choice, 'time': $scope.counter, 'points': points};
       $scope.counter = BREAK_TIME;
       mytimeout = $timeout($scope.onTimeout, 1000);
       $scope.state = 'break';
