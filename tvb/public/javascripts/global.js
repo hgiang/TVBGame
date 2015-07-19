@@ -63,7 +63,8 @@ function addQuestion(event) {
         var newQuestion = {
             'question': $('#addQuestion fieldset input#inputQuestion').val(),
             'answer': $('#addQuestion fieldset input#inputAnswer').val(),
-            'choices': JSON.parse(JSON.stringify(choices))
+            'choices': JSON.parse(JSON.stringify(choices)), 
+            //'rnd': Math.random(),
         }
 
         // Use AJAX to post the object to our addquestion service
