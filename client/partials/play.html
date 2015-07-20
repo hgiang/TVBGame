@@ -5,38 +5,23 @@
     </div>
     <div class= 'col-md-6 text-right'>
       <p><h3>Time Remaining: <span id="timer" ng-bind='counter'>:30</span></h3></p> 
-      <p><h3>Points: <span id="ptsforq" ng-bind='total_points'></span> </h3></p>
+      <!--- <p><h3>Points: <span id="ptsforq" ng-bind='total_points'></span> </h3></p> -->
     </div>
 
     <div class="question well ng-scope">
       <div class = "row">        
         <h3 class="question-h">&nbsp; &nbsp;{{currentQ.question}}</h3>
-        <div class="col-md-6">          
+        <div class="col-md-6">
           <!-- ngRepeat: anime in currentQ.titles -->
-            <div ng-if="currentQ.type == 'choices'">
-              <table>
-                <tr  ng-repeat="choice in currentQ['choices[]']" >
-                  <td style="padding: 5px 10px;">
-                    <button class="answer answer-{{$index}} btn btn-info" ng-disabled="state != &#39;answering&#39;" ng-click="answer(choice)" value="{{choice}}" >
-                      <span ng-bind='choice'></span> 
-                    </button>
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div ng-if="currentQ.type == 'text'">            
-                <form name="form" novalidate>
-                  <div class="form-group">
-                  <input type="text" ng-model="choice" name="choice" class="form-control"  placeholder="Answer" required/>
-                  </div>
-                  <br/>
-                    <div ng-show="form.$submitted || form.choice.$touched">
-                      <div ng-show="form.choice.$error.required">Tell us your choice.</div>
-                    </div>
-                  <br/>  
-                  <input type="submit" class = 'btn btn-info' ng-click="answer(choice)" ng-disabled="form.choice.$dirty && form.choice.$invalid" />
-                </form>
-            </div>            
+          <table>
+            <tr  ng-repeat="choice in currentQ['choices[]']" >
+              <td style="padding: 5px 10px;">
+                <button class="answer answer-{{$index}} btn btn-info" ng-disabled="state != &#39;answering&#39;" ng-click="answer(choice)" value="{{choice}}" >
+                  <span ng-bind='choice'></span> 
+                </button>
+              </td>
+            </tr>
+          </table>
         </div>                 
       </div>
     </div>
