@@ -44,9 +44,16 @@ function addQuestion(event) {
 
     // Super basic validation - increase errorCount variable if any fields are blank
     var errorCount = 0;
+    /*
     $('#addQuestion input').each(function(index, val) {
         if($(this).val() === '') { errorCount++; }
-    });
+    });*/
+
+    var question = $("#inputQuestion").val();
+    var answer = $("#inputAnswer").val();
+
+    if(question === '' || answer === '')
+        errorCount = 1;
 
     // Check and make sure errorCount's still at zero
     if(errorCount === 0) {
