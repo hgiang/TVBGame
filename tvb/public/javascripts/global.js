@@ -54,17 +54,32 @@ function addQuestion(event) {
         // If it is, compile all question info into one object
         var choices = []
         $('#addQuestion fieldset .inputChoices').each(function()
-        {
-            choices.push($(this).val())
+        {   if($(this).val())
+            {
+                choices.push($(this).val())
+            }
         })
 
-        console.log(JSON.parse(JSON.stringify(choices)))
+        if(choices.length > 0)
+        {
+            var newQuestion = {
+                'question': $('#addQuestion fieldset input#inputQuestion').val(),
+                'answer': $('#addQuestion fieldset input#inputAnswer').val(),
+                'type': 'choices',
+                'choices': JSON.parse(JSON.stringify(choices)), 
+                //'rnd': Math.random(),
+            }
+        }
 
-        var newQuestion = {
-            'question': $('#addQuestion fieldset input#inputQuestion').val(),
-            'answer': $('#addQuestion fieldset input#inputAnswer').val(),
-            'choices': JSON.parse(JSON.stringify(choices)), 
-            //'rnd': Math.random(),
+        else
+        {
+            var newQuestion = {
+                'question': $('#addQuestion fieldset input#inputQuestion').val(),
+                'answer': $('#addQuestion fieldset input#inputAnswer').val(),
+                'type': 'text',
+                'choices': JSON.parse(JSON.stringify(choices)), 
+                //'rnd': Math.random(),
+            }
         }
 
         // Use AJAX to post the object to our addquestion service
