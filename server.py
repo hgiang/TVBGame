@@ -17,5 +17,5 @@ if __name__ == "__main__":
         (r"/", WebHandler),        
         (r"/(.*)", tornado.web.StaticFileHandler, {"path": "client"}),
     ])
-    application.listen(8000, address = '155.69.150.184')
+    application.listen(8000, address = '155.69.151.138')
     tornado.ioloop.IOLoop.current().start()

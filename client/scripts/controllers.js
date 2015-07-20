@@ -96,20 +96,14 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
 
     $scope.answer = function(choice) {
       if ($scope.state != 'answering') return;
-      var points = 0;
-      var index = aQ()['choices[]'].indexOf(choice);
+      var points = 0;      
       $scope.stop();     
       $scope.correct = (choice == aQ().answer);
 
       if ($scope.correct) {
         points = Math.ceil($scope.counter/3);
-        $scope.total_points += points;
-        changeAnswBtn(index, 'btn-success');
-      } else {
-        var correct = aQ()['choices[]'].indexOf(aQ().answer);
-        changeAnswBtn(correct, 'btn-success');
-        changeAnswBtn(index, 'btn-danger');
-      }
+        $scope.total_points += points;        
+      } 
 
       $scope.answers[$scope.current] = {'choice': choice, 'time': $scope.counter, 'points': points};
       $scope.counter = BREAK_TIME;
