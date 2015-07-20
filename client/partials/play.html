@@ -4,8 +4,12 @@
     <h2>Question <span ng-bind='current + 1'></span> from  <span ng-bind='questions.length'></span></h2>
     </div>
     <div class= 'col-md-6 text-right'>
-      <p><h3>Time Remaining: <span id="timer" ng-bind='counter'>:30</span></h3></p> 
-      <p><h3>Points: <span id="ptsforq" ng-bind='total_points'></span> </h3></p>
+      <div ng-if = "state == 'answering'">
+        <p><h3>Time Remaining: <span id="timer" ng-bind='counter'></span></h3></p> 
+      </div>
+      <div ng-if = "state == 'break'">
+        <p><h3>Time Break: <span id="timer" ng-bind='counter'></span></h3></p> 
+      </div>      
     </div>
 
     <div class="question well ng-scope">
