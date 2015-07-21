@@ -1,0 +1,61 @@
+<div class='container'>
+  <div ng-show= "started">
+    <div class= 'col-md-6' >
+    <h2>Question <span ng-bind='current + 1'></span> from  <span ng-bind='questions.length'></span></h2>
+    </div>
+    <div class= 'col-md-6 text-right'>
+      <div ng-if = "state == 'answering'">
+        <p><h3>Time Remaining: <span id="timer" ng-bind='counter'></span></h3></p> 
+      </div>
+      <div ng-if = "state == 'break'">
+        <p><h3>Time Break: <span id="timer" ng-bind='counter'></span></h3></p> 
+      </div>      
+    </div>
+
+    <div class="question well ng-scope">
+      <div class = "row">        
+        <h3 class="question-h">&nbsp; &nbsp;{{currentQ.question}}</h3>
+        <div class="col-md-6">          
+          <!-- ngRepeat: anime in currentQ.titles -->
+            <div ng-if="currentQ.type == 'choices'">
+              <table>
+                <tr  ng-repeat="choice in currentQ['choices[]']" >
+                  <td style="padding: 5px 10px;">
+                    <button class="answer answer-{{$index}} btn btn-info" ng-disabled="state != &#39;answering&#39;" ng-click="answer(choice)" value="{{choice}}" >
+                      <span ng-bind='choice'></span> 
+                    </button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div ng-if="currentQ.type == 'text'">            
+                <form name="form" ng-submit="answer(answer.text)" novalidate>
+                  <div class="form-group">
+                  <input type="text" ng-model= 'answer.text' class="form-control" name="choice"  placeholder="Answer" required/>
+                  </div>
+                  <br/>
+                    <div ng-show="form.$submitted || form.choice.$touched">
+                      <div ng-show="form.choice.$error.required && state == 'answering' ">Tell us your choice.</div>
+                    </div>
+                  <br/>  
+                  <input type="submit" class = 'btn btn-info'ng-disabled= "(form.choice.$dirty && form.choice.$invalid) || state == 'break' " />
+                </form>
+            </div>           
+        </div>                 
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary ng-scope ng-hide" id="summary" ng-hide="state !== &#39;summary&#39;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Game Over</h3>
+    </div>
+    <div class="panel-body ng-binding">
+      <h3>Summary</h3>
+      <strong>Points:</strong> <span class="label label-success ng-binding" ng-bind = 'total_points'></span><br>
+      <strong>Correct answers:</strong> <span class="label label-success ng-binding" ng-bind = 'correctAnswers()'></span>/ <span ng-bind='questions.length'><br>
+      <strong>Avg. answer time:</strong>  <br>
+      <br>
+    </div>
+  </div>
+</div>
