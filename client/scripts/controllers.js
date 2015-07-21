@@ -15,7 +15,7 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
     $scope.started = true;
     $scope.state = '';
     $scope.total_points = 0;
-    $scope.answer = {text : ''};
+    $scope.answer = { text : '' };
 
     $scope.$on('$routeChangeSuccess', function () {
         $scope.begin();
@@ -58,8 +58,8 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
       window.onbeforeunload = undefined;      
     };
 
-    $scope.loadNext = function() {    
-      $scope.answer.text = null;        
+    $scope.loadNext = function() {
+      $scope.answer.text = '';        
       $scope.current += 1;
       $scope.currentQ = $scope.questions[$scope.current]
       if ($scope.current >= $scope.questions.length) {
@@ -90,17 +90,11 @@ angular.module('tvbGame').controller('gameController', ['$scope', 'questionSet',
       return $scope.questions[$scope.current];
     }
 
-    function changeAnswBtn(index, cls) {
-      $('.question:not(.ng-hide) .answer-' + index)
-        .removeClass('btn-info')
-        .addClass(cls);
-    }
-
     $scope.answer = function(choice) {
       if ($scope.state != 'answering') return;
       var points = 0;      
       $scope.stop();     
-      $scope.correct = (choice == aQ().answer);
+      $scope.correct = (choice.toLowerCase() == aQ().answer.toLowerCase());
 
       if ($scope.correct) {
         points = Math.ceil($scope.counter/3);
