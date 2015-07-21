@@ -29,18 +29,18 @@
               </table>
             </div>
             <div ng-if="currentQ.type == 'text'">            
-                <form name="form" novalidate>
+                <form name="form" ng-submit="answer(answer.text)" novalidate>
                   <div class="form-group">
-                  <input type="text" ng-model="choice" name="choice" class="form-control"  placeholder="Answer" required/>
+                  <input type="text" ng-model= 'answer.text' class="form-control" name="choice"  placeholder="Answer" required/>
                   </div>
                   <br/>
                     <div ng-show="form.$submitted || form.choice.$touched">
-                      <div ng-show="form.choice.$error.required">Tell us your choice.</div>
+                      <div ng-show="form.choice.$error.required && state == 'answering' ">Tell us your choice.</div>
                     </div>
                   <br/>  
-                  <input type="submit" class = 'btn btn-info' ng-click="answer(choice)" ng-disabled="form.choice.$dirty && form.choice.$invalid" />
+                  <input type="submit" class = 'btn btn-info'ng-disabled= "(form.choice.$dirty && form.choice.$invalid) || state == 'break' " />
                 </form>
-            </div>            
+            </div>           
         </div>                 
       </div>
     </div>
